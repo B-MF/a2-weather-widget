@@ -42,6 +42,12 @@ REQUIREMENTS
             Node
         
     Day 2.
+        Signed up for Weather API
+        Created weather.js
+        Started trying to fetch information from API
+        Created base HTML file with placeholder information
+
+
 
     
 

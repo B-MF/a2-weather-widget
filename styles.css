@@ -1,0 +1,26 @@
+*{box-sizing: border-box;}
+
+body{
+    text-align: center;
+}
+#widget-container{
+    background-image: linear-gradient(to bottom right, lightblue, rgb(86, 108, 164));
+    border-radius: 15px;
+    padding: 1rem;
+}
+h1{margin-top: 0;}
+
+#current-temp{
+    font-size: 2rem;
+}
+
+#day-card-container{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.day-card{
+    background-color: rgba(223, 253, 255, 0.3);
+    border-radius: 15px;
+}
+.day-card img{width: 100%;}

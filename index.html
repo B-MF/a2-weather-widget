@@ -5,20 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Widget</title>
     <script src="weather.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="widget-container">
-        <header>Location & Time</header>
+    <div id="widget-container">
+        <header>
+            <h1>Location & Time</h1>
+        </header>
 
         <img src="https://placeholder.com/100x100" alt="weather icon placeholder">
         <p>Weather Condition</p>
-        <p>temperature C/F</p>
+        <p id="current-temp">temperature C/F</p>
+        <button>C&deg/F&deg</button>
 
-        <div class="day-card-container">
-            <div>
-                <p>Day</p>
+        <div id="day-card-container">
+            <div class="day-card">
+                <p>Monday</p>
                 <img src="https://placeholder.com/25x25" alt="weather icon placeholder">
-                <p>temperature C/F</p>
+                <p>20 C&deg</p>
+            </div>
+            <div class="day-card">
+                <p>Tuesday</p>
+                <img src="https://placeholder.com/25x25" alt="weather icon placeholder">
+                <p>20 C&deg</p>
             </div>
 
         </div>

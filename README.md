@@ -47,6 +47,11 @@ REQUIREMENTS
         Started trying to fetch information from API
         Created base HTML file with placeholder information
 
+    Day 3.
+        Created styles.css
+        Started designing UI components
+
+
 
 
     

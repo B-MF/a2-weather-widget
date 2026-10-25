@@ -50,6 +50,32 @@ REQUIREMENTS
     Day 3.
         Created styles.css
         Started designing UI components
+    
+    Day 4.
+        Researched CORS policy error
+            Debugged - had capitalized location in URL
+        Created async functions to fetch and log current and forecasted weather from API
+        Customized json data in API website to simplify data being fetched
+        Built function for creating forecast day card and appending to container
+        Created async function to render the forecast cards
+        Errors accessing information 
+            undefined - debugging - I believe I'm not accessing the arrays correctly
+        Created function to create and render the weather widget information from fetched data
+            accessing arrays correctly
+        Debugging forecast rendering
+            issue is in the current weather rendering process - commenting out section of js lets forecast render
+            
+        
+        NEXT To-Do
+        [] Would making one fetch function work better? or is the problem elsewhere?
+
+        [] function to get the day of the week
+        [] Celsius and Fahrenheit toggle
+            
+        
+        
+
+
 
 
 

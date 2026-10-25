@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Widget</title>
-    <script src="weather.js"></script>
+    <script src="weather.js" type="module"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="widget-container">
         <header>
-            <h1>Location & Time</h1>
+            <h1>Weather Widget</h1>
+            <p id="status"> Loading Forecast...</p>
         </header>
 
         <img src="https://placeholder.com/100x100" alt="weather icon placeholder">
@@ -19,16 +20,6 @@
         <button>C&deg/F&deg</button>
 
         <div id="day-card-container">
-            <div class="day-card">
-                <p>Monday</p>
-                <img src="https://placeholder.com/25x25" alt="weather icon placeholder">
-                <p>20 C&deg</p>
-            </div>
-            <div class="day-card">
-                <p>Tuesday</p>
-                <img src="https://placeholder.com/25x25" alt="weather icon placeholder">
-                <p>20 C&deg</p>
-            </div>
 
         </div>
 

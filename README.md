@@ -64,15 +64,28 @@ REQUIREMENTS
             accessing arrays correctly
         Debugging forecast rendering
             issue is in the current weather rendering process - commenting out section of js lets forecast render
-            
-        
-        NEXT To-Do
-        [] Would making one fetch function work better? or is the problem elsewhere?
+    
+    Day 5.
+        Weather API email. Free tier on October 28th. Free tier only gives 3 day forecast. Switching widget to that.
 
-        [] function to get the day of the week
-        [] Celsius and Fahrenheit toggle
+        Debugging Rendering: 
+        Reduced fetching to one function, returning an array of the data needed.
+        switched how the current weather was created from innerHTML to appendChild. (no effect).
+        Reduced rendering to one function but had innerHTML null error. Scope issue, moved getElementById to inside the forEach loop to fix problem.
+
+        Building formatting function to populate widget with month and day
+            Can't set a new date, not understanding it correctly. Switching gears for now
+
+        Developing temperature toggle button
+
+    NEXT To-Do
+    [] function to get the day of the week
+    [] Celsius and Fahrenheit toggle
+    [] Icons
             
-        
+    
+
+
         
 
 

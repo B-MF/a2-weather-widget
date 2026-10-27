@@ -78,10 +78,13 @@ REQUIREMENTS
 
         Developing temperature toggle button
 
+    Day 6.
+        Gave in and used AI to solve my scope issues with my toggle button, how to implement the icons, and to format the dates from weatherAPI.
+        
+        Creating AI reflection documentation.
+
     NEXT To-Do
-    [] function to get the day of the week
-    [] Celsius and Fahrenheit toggle
-    [] Icons
+    [] finish styling widget
             
     
 

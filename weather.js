@@ -1,21 +1,24 @@
-//API information 
+//----API information 
+//url components
 const base_URL = "https://api.weatherapi.com/v1";
 const key = "19d952ab1d164771b4723930262110";
-//3 day forecast API request url
+//Free Tier 3 day forecast API request url
 const forecast_URL = `${base_URL}/forecast.json?key=${key}&q=calgary&days=3`;
 
-//Variables
+//-------VARIABLES
+//Loading Page
 const statusEl = document.getElementById("status");
 const loading = document.getElementById("loading");
-const header = document.getElementById("widget-header");
+//Widget
 const widget = document.getElementById("widget-container");
+const header = document.getElementById("widget-header");
+//Temperature
 let celsius = true;
 let currentWeather;
-let forecastWeather
+let forecastWeather;
 
 
 //----------FETCHING WEATHER DATA
-
 async function fetchWeather(url){
     try{
         const response = await fetch(url);
@@ -53,7 +56,7 @@ function formatDate(dateString){
 function getWeatherIcon(condition) {
     const weather = condition.toLowerCase();
 
-    if (weather.includes("sunny")) { return "wi:day-sunny";}
+    if (weather.includes("sunny")) {return "wi:day-sunny";}
     if (weather.includes("partly")) {return "wi:day-cloudy";}
     if (weather.includes("cloud")) {return "wi:cloudy";}
     if (weather.includes("overcast")) {return "wi:cloudy";}
@@ -66,24 +69,35 @@ function getWeatherIcon(condition) {
     return "wi:day-sunny-overcast";
 }
 
-//Build current weather section
+//Build currentWeather section
 function createCurrentWeather(today){
+    
     const h1 = document.createElement("h1");
     h1.textContent = formatDate(today.last_updated);
 
-    const icon = document.createElement("iconify-icon");
-    icon.setAttribute("icon", getWeatherIcon(today.condition.text));
-    icon.setAttribute("width", "100");
-    icon.setAttribute("height", "100");
+    const currently = document.createElement("div");
+    currently.id = "today-weatherbox";
 
-    const p = document.createElement("p");
-    p.textContent = today.condition.text;
-    p.id = "today-condition";
+        const condition = document.createElement("div");
+    
+            const icon = document.createElement("iconify-icon");
+            icon.setAttribute("icon", getWeatherIcon(today.condition.text));
+            icon.setAttribute("width", "100");
+            icon.setAttribute("height", "100");
 
-    const temp = document.createElement("p");
-    temp.id = "current-temp";
-    temp.classList.add("temp");
-    temp.innerHTML = `${celsius ? today.temp_c : today.temp_f} ${celsius ? "°C" : "°F"}`;
+            const p = document.createElement("p");
+            p.textContent = today.condition.text;
+            p.id = "today-condition";
+
+        condition.appendChild(icon);
+        condition.appendChild(p);
+
+        const temp = document.createElement("p");
+        temp.id = "current-temp";
+        temp.classList.add("temp");
+        temp.innerHTML = `${celsius ? today.temp_c : today.temp_f} ${celsius ? "°C" : "°F"}`;
+    currently.appendChild(condition);
+    currently.appendChild(temp);
 
     const button = document.createElement("button");
     button.textContent = "°C | °F";
@@ -93,9 +107,7 @@ function createCurrentWeather(today){
     div.id = "day-card-container";
 
     widget.appendChild(h1);
-    widget.appendChild(icon);
-    widget.appendChild(p);
-    widget.appendChild(temp);
+    widget.appendChild(currently);
     widget.appendChild(div);
     widget.appendChild(button);
 }

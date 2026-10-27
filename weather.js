@@ -1,5 +1,5 @@
 //API information 
-const base_URL = "http://api.weatherapi.com/v1";
+const base_URL = "https://api.weatherapi.com/v1";
 const key = "19d952ab1d164771b4723930262110";
 //3 day forecast API request url
 const forecast_URL = `${base_URL}/forecast.json?key=${key}&q=calgary&days=3`;

@@ -73,10 +73,11 @@ function getWeatherIcon(condition) {
 function createCurrentWeather(today){
     
     const h1 = document.createElement("h1");
+    h1.id="today-date"
     h1.textContent = formatDate(today.last_updated);
 
     const currently = document.createElement("div");
-    currently.id = "today-weatherbox";
+    currently.id = "today-weather";
 
         const condition = document.createElement("div");
     
@@ -93,7 +94,7 @@ function createCurrentWeather(today){
         condition.appendChild(p);
 
         const temp = document.createElement("p");
-        temp.id = "current-temp";
+        temp.id = "today-temp";
         temp.classList.add("temp");
         temp.innerHTML = `${celsius ? today.temp_c : today.temp_f} ${celsius ? "°C" : "°F"}`;
     currently.appendChild(condition);

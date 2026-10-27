@@ -7,19 +7,21 @@ const forecast_URL = `${base_URL}/forecast.json?key=${key}&q=calgary&days=3`;
 //Variables
 const statusEl = document.getElementById("status");
 const loading = document.getElementById("loading");
-
+const header = document.getElementById("widget-header");
+const widget = document.getElementById("widget-container");
 let celsius = true;
 let currentWeather;
 let forecastWeather
 
 
-//Fetch Weather Data
+//----------FETCHING WEATHER DATA
+
 async function fetchWeather(url){
     try{
         const response = await fetch(url);
         
         if(!response.ok){
-            throw new Error(`Something has gone wrong fetching the data: ${response.status}`);
+            throw new Error(`Error fetching data: ${response.status}`);
         }
 
         const jsonData = await response.json();
@@ -30,19 +32,21 @@ async function fetchWeather(url){
         return [current,forecastday];
 
     } catch(error) {
-        statusEl.textContent="Something went wrong fetching from the API";
         console.log(error);
-    }
+        throw error;
+    } 
 }
+
+//----------FUNCTIONS
 
 //Formatting Date from ISO to Month and Day
 function formatDate(dateString){
     const date = new Date(dateString);
 
-    return date.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric"
-    });
+    const months = ["Jan", "Feb", "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    return `${month} ${day}`;
 }
 
 //Mapping weather icons from weatherAPI for Iconify icons
@@ -64,8 +68,6 @@ function getWeatherIcon(condition) {
 
 //Build current weather section
 function createCurrentWeather(today){
-    const widget = document.getElementById("widget-container");
-
     const h1 = document.createElement("h1");
     h1.textContent = formatDate(today.last_updated);
 
@@ -122,7 +124,7 @@ function createDayCard(index){
 
 //Update widget
 function updateWidget(){
-    document.getElementById("widget-container").innerHTML = "";
+    widget.innerHTML = "";
 
     createCurrentWeather(currentWeather);
 
@@ -140,7 +142,9 @@ function updateWidget(){
         }) 
 }
 
-//Render dynamic widget
+
+//-------------RENDERING DYNAMIC WIDGET
+
 async function renderWidget(){
     try{
         const weather = await fetchWeather(forecast_URL);
@@ -167,6 +171,15 @@ async function renderWidget(){
   
 
     } catch(error) {
+        widget.innerHTML = `
+        <section id="error">
+            <h1>Weather Unavailable</h1>
+
+            <p>Sorry, something went wrong.</p>
+
+            <p class="error-details">${error.message}</p>
+        </section>
+        `
         console.log(error);
     } finally {
         loading.style.display = "none";

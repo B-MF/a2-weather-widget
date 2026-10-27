@@ -79,12 +79,17 @@ REQUIREMENTS
         Developing temperature toggle button
 
     Day 6.
-        Gave in and used AI to solve my scope issues with my toggle button, how to implement the icons, and to format the dates from weatherAPI.
+        Gave in and used AI to help me solve my scope issues with my toggle button, how to implement the icons, and to format the dates from weatherAPI.
         
         Creating AI reflection documentation.
 
-    NEXT To-Do
-    [] finish styling widget
+    Day 7.
+        Fixed formatDate
+        Finished AI reflection documentation
+        Fixed error messaging
+        Finished Styling
+        Created Responsive design
+
             
     
 

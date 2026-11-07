@@ -1,25 +1,57 @@
 //----API information 
 //url components
-const base_URL = "https://api.weatherapi.com/v1";
-const key = "19d952ab1d164771b4723930262110";
+const base_URL: string = "https://api.weatherapi.com/v1";
+const key: string= "19d952ab1d164771b4723930262110";
 //Free Tier 3 day forecast API request url
-const forecast_URL = `${base_URL}/forecast.json?key=${key}&q=calgary&days=3`;
+const forecast_URL:string = `${base_URL}/forecast.json?key=${key}&q=calgary&days=3`;
+
+//Typescript refactor
+function getElement(id: string): HTMLElement {
+    const element = document.getElementById(id);
+    
+    if(!element) {
+        throw new Error(`Element ${id} not found`);
+    }
+    return element;
+}
 
 //-------VARIABLES
 //Loading Page
-const statusEl = document.getElementById("status");
-const loading = document.getElementById("loading");
+const statusEl = getElement("status");
+const loading = getElement("loading");
+
 //Widget
-const widget = document.getElementById("widget-container");
-const header = document.getElementById("widget-header");
+const widget = getElement("widget-container");
+const header = getElement("widget-header");
+
 //Temperature
-let celsius = true;
-let currentWeather;
-let forecastWeather;
+let celsius: boolean = true;
+
+//typescript Interfaces
+interface WeatherCondition{
+    text: string;
+}
+interface CurrentWeather{
+    last_updated: string;
+    temp_c: number;
+    temp_f: number;
+    condition: WeatherCondition;
+}
+interface ForecastDay{
+    date: string;
+    day: {
+        avgtemp_c: number;
+        avgtemp_f:number;
+        condition: WeatherCondition;
+    }
+}
+
+let currentWeather: CurrentWeather;
+let forecastWeather: ForecastDay[];
 
 
 //----------FETCHING WEATHER DATA
-async function fetchWeather(url){
+async function fetchWeather(url: string): Promise<[CurrentWeather, ForecastDay[]]> {
     try{
         const response = await fetch(url);
         
@@ -43,7 +75,7 @@ async function fetchWeather(url){
 //----------FUNCTIONS
 
 //Formatting Date from ISO to Month and Day
-function formatDate(dateString){
+function formatDate(dateString: string):string {
     const date = new Date(dateString);
 
     const months = ["Jan", "Feb", "Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -53,7 +85,7 @@ function formatDate(dateString){
 }
 
 //Mapping weather icons from weatherAPI for Iconify icons
-function getWeatherIcon(condition) {
+function getWeatherIcon(condition: string):string {
     const weather = condition.toLowerCase();
 
     if (weather.includes("sunny")) {return "wi:day-sunny";}
@@ -70,7 +102,7 @@ function getWeatherIcon(condition) {
 }
 
 //Build currentWeather section
-function createCurrentWeather(today){
+function createCurrentWeather(today: CurrentWeather): void {
     
     const h1 = document.createElement("h1");
     h1.id="today-date"
@@ -114,7 +146,7 @@ function createCurrentWeather(today){
 }
 
 //Build forecast day cards
-function createDayCard(index){
+function createDayCard(index: ForecastDay): string{
     const temp = celsius ? index.day.avgtemp_c : index.day.avgtemp_f;
     const unit = celsius ? "°C" : "°F";
     
@@ -141,13 +173,13 @@ function updateWidget(){
 
     createCurrentWeather(currentWeather);
 
-    const cardContainer = document.getElementById("day-card-container");
+    const cardContainer = getElement("day-card-container");
 
     forecastWeather.forEach((index) => {
         cardContainer.innerHTML += createDayCard(index);
     });
 
-    const toggleBtn = document.getElementById("temp-toggle");
+    const toggleBtn = getElement("temp-toggle");
 
     toggleBtn.addEventListener("click",function(){
             celsius = !celsius;
@@ -170,12 +202,12 @@ async function renderWidget(){
         createCurrentWeather(currentWeather);
 
         forecastWeather.forEach((index) => {
-            const cardContainer = document.getElementById("day-card-container");
+            const cardContainer = getElement("day-card-container");
 
             cardContainer.innerHTML += createDayCard(index);
         })
 
-        const toggleBtn = document.getElementById("temp-toggle");
+        const toggleBtn = getElement("temp-toggle");
 
         toggleBtn.addEventListener("click",function(){
             celsius = !celsius;
@@ -184,13 +216,17 @@ async function renderWidget(){
   
 
     } catch(error) {
+        const message = error instanceof Error
+            ? error.message
+            : "unknown error";
+
         widget.innerHTML = `
         <section id="error">
             <h1>Weather Unavailable</h1>
 
             <p>Sorry, something went wrong.</p>
 
-            <p class="error-details">${error.message}</p>
+            <p class="error-details">${message}</p>
         </section>
         `
         console.log(error);

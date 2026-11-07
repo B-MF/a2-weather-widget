@@ -1,11 +1,32 @@
 //----API information 
 //url components
 const base_URL: string = "https://api.weatherapi.com/v1";
-const key: string= "19d952ab1d164771b4723930262110";
-//Free Tier 3 day forecast API request url
+const key: string= "19d952ab1d164771b4723930262110"; // Improvement: make this more secure
+
+//Free Tier: 3 day forecast API request url
 const forecast_URL:string = `${base_URL}/forecast.json?key=${key}&q=calgary&days=3`;
 
-//Typescript refactor
+//------REFACTOR ADDITIONS
+//Interfaces for fetch data
+interface WeatherCondition{
+    text: string;
+}
+interface CurrentWeather{
+    last_updated: string;
+    temp_c: number;
+    temp_f: number;
+    condition: WeatherCondition;
+}
+interface ForecastDay{
+    date: string;
+    day: {
+        avgtemp_c: number;
+        avgtemp_f:number;
+        condition: WeatherCondition;
+    }
+}
+
+// Error handling for getElementById
 function getElement(id: string): HTMLElement {
     const element = document.getElementById(id);
     
@@ -27,30 +48,13 @@ const header = getElement("widget-header");
 //Temperature
 let celsius: boolean = true;
 
-//typescript Interfaces
-interface WeatherCondition{
-    text: string;
-}
-interface CurrentWeather{
-    last_updated: string;
-    temp_c: number;
-    temp_f: number;
-    condition: WeatherCondition;
-}
-interface ForecastDay{
-    date: string;
-    day: {
-        avgtemp_c: number;
-        avgtemp_f:number;
-        condition: WeatherCondition;
-    }
-}
-
+//Fetch Data
 let currentWeather: CurrentWeather;
 let forecastWeather: ForecastDay[];
 
 
 //----------FETCHING WEATHER DATA
+//Improvement: separate fetching into its own module
 async function fetchWeather(url: string): Promise<[CurrentWeather, ForecastDay[]]> {
     try{
         const response = await fetch(url);
@@ -66,13 +70,13 @@ async function fetchWeather(url: string): Promise<[CurrentWeather, ForecastDay[]
 
         return [current,forecastday];
 
-    } catch(error) {
+    } catch(error) {//Improvement: better error messaging ux
         console.log(error);
         throw error;
     } 
 }
 
-//----------FUNCTIONS
+//----------WIDGET FUNCTIONS
 
 //Formatting Date from ISO to Month and Day
 function formatDate(dateString: string):string {
@@ -179,7 +183,7 @@ function updateWidget(){
         cardContainer.innerHTML += createDayCard(index);
     });
 
-    const toggleBtn = getElement("temp-toggle");
+    const toggleBtn = getElement("temp-toggle"); //Improvement: toggle button into a function
 
     toggleBtn.addEventListener("click",function(){
             celsius = !celsius;

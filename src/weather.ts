@@ -6,7 +6,10 @@ const key: string= "19d952ab1d164771b4723930262110"; // Improvement: make this m
 //Free Tier: 3 day forecast API request url
 const forecast_URL:string = `${base_URL}/forecast.json?key=${key}&q=calgary&days=3`;
 
-//------REFACTOR ADDITIONS
+
+
+//------TYPESCRIPT REFACTORING ADDITIONS
+
 //Interfaces for fetch data
 interface WeatherCondition{
     text: string;
@@ -36,7 +39,10 @@ function getElement(id: string): HTMLElement {
     return element;
 }
 
+
+
 //-------VARIABLES
+
 //Loading Page
 const statusEl = getElement("status");
 const loading = getElement("loading");
@@ -53,8 +59,10 @@ let currentWeather: CurrentWeather;
 let forecastWeather: ForecastDay[];
 
 
+
 //----------FETCHING WEATHER DATA
 //Improvement: separate fetching into its own module
+
 async function fetchWeather(url: string): Promise<[CurrentWeather, ForecastDay[]]> {
     try{
         const response = await fetch(url);
@@ -76,6 +84,9 @@ async function fetchWeather(url: string): Promise<[CurrentWeather, ForecastDay[]
     } 
 }
 
+
+
+
 //----------WIDGET FUNCTIONS
 
 //Formatting Date from ISO to Month and Day
@@ -89,6 +100,7 @@ function formatDate(dateString: string):string {
 }
 
 //Mapping weather icons from weatherAPI for Iconify icons
+//Improvement: use enum type
 function getWeatherIcon(condition: string):string {
     const weather = condition.toLowerCase();
 
@@ -171,6 +183,16 @@ function createDayCard(index: ForecastDay): string{
     `
 }
 
+//Toggle Button
+function toggleTemp(){
+    const toggleBtn = getElement("temp-toggle");
+
+    toggleBtn.addEventListener("click",function(){
+        celsius = !celsius;
+        updateWidget();
+    }) 
+}
+
 //Update widget
 function updateWidget(){
     widget.innerHTML = "";
@@ -183,12 +205,8 @@ function updateWidget(){
         cardContainer.innerHTML += createDayCard(index);
     });
 
-    const toggleBtn = getElement("temp-toggle"); //Improvement: toggle button into a function
-
-    toggleBtn.addEventListener("click",function(){
-            celsius = !celsius;
-            updateWidget();
-        }) 
+    toggleTemp();
+    
 }
 
 
@@ -197,7 +215,6 @@ function updateWidget(){
 async function renderWidget(){
     try{
         const weather = await fetchWeather(forecast_URL);
-
         const [current, forecast] = weather;
 
         currentWeather = current;
@@ -211,12 +228,7 @@ async function renderWidget(){
             cardContainer.innerHTML += createDayCard(index);
         })
 
-        const toggleBtn = getElement("temp-toggle");
-
-        toggleBtn.addEventListener("click",function(){
-            celsius = !celsius;
-            updateWidget();
-        }) 
+        toggleTemp();
   
 
     } catch(error) {

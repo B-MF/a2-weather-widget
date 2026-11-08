@@ -1,12 +1,12 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+/* Object.defineProperty(exports, "__esModule", { value: true }); */
 //----API information 
 //url components
 const base_URL = "https://api.weatherapi.com/v1";
-const key = "19d952ab1d164771b4723930262110";
-//Free Tier 3 day forecast API request url
+const key = "19d952ab1d164771b4723930262110"; // Improvement: make this more secure
+//Free Tier: 3 day forecast API request url
 const forecast_URL = `${base_URL}/forecast.json?key=${key}&q=calgary&days=3`;
-//Typescript refactor
+// Error handling for getElementById
 function getElement(id) {
     const element = document.getElementById(id);
     if (!element) {
@@ -23,9 +23,11 @@ const widget = getElement("widget-container");
 const header = getElement("widget-header");
 //Temperature
 let celsius = true;
+//Fetch Data
 let currentWeather;
 let forecastWeather;
 //----------FETCHING WEATHER DATA
+//Improvement: separate fetching into its own module
 async function fetchWeather(url) {
     try {
         const response = await fetch(url);
@@ -38,12 +40,12 @@ async function fetchWeather(url) {
         const { forecastday } = forecast;
         return [current, forecastday];
     }
-    catch (error) {
+    catch (error) { //Improvement: better error messaging ux
         console.log(error);
         throw error;
     }
 }
-//----------FUNCTIONS
+//----------WIDGET FUNCTIONS
 //Formatting Date from ISO to Month and Day
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -53,6 +55,7 @@ function formatDate(dateString) {
     return `${month} ${day}`;
 }
 //Mapping weather icons from weatherAPI for Iconify icons
+//Improvement: use enum type
 function getWeatherIcon(condition) {
     const weather = condition.toLowerCase();
     if (weather.includes("sunny")) {
@@ -136,6 +139,14 @@ function createDayCard(index) {
     </div>
     `;
 }
+//Toggle Button
+function toggleTemp() {
+    const toggleBtn = getElement("temp-toggle");
+    toggleBtn.addEventListener("click", function () {
+        celsius = !celsius;
+        updateWidget();
+    });
+}
 //Update widget
 function updateWidget() {
     widget.innerHTML = "";
@@ -144,11 +155,7 @@ function updateWidget() {
     forecastWeather.forEach((index) => {
         cardContainer.innerHTML += createDayCard(index);
     });
-    const toggleBtn = getElement("temp-toggle");
-    toggleBtn.addEventListener("click", function () {
-        celsius = !celsius;
-        updateWidget();
-    });
+    toggleTemp();
 }
 //-------------RENDERING DYNAMIC WIDGET
 async function renderWidget() {
@@ -162,11 +169,7 @@ async function renderWidget() {
             const cardContainer = getElement("day-card-container");
             cardContainer.innerHTML += createDayCard(index);
         });
-        const toggleBtn = getElement("temp-toggle");
-        toggleBtn.addEventListener("click", function () {
-            celsius = !celsius;
-            updateWidget();
-        });
+        toggleTemp();
     }
     catch (error) {
         const message = error instanceof Error

@@ -1,65 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+/* ---- BASE STYLINGS */
 *{box-sizing: border-box;}
 
 body{
-    text-align: center;
-    width: 90%;
-    margin: 1rem auto;
     font-family: 'Lato', Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    margin: 0;
+    color: white;
 }
-/* Classes */
+/*----------CLASSES */
+
+/* Temperatures */
 .temp{
     font-weight:bold;
+    font-size: 1.25rem;
     margin: 0;
 }
-/* -------THE CONTAINER */
+/* -------THE WIDGET */
 #widget-container{
     background-image: linear-gradient(to bottom right, lightblue, rgb(86, 108, 164),rgb(58, 54, 119));
-    border-radius: 15px;
+    /* border-radius: 15px; */
     padding: 1rem;
     width: 100%;
     justify-self: center;
 }
-h1{margin: 0;}
 
-
+/* Current Weather */
 #today-condition{
     margin-top: 0;
 }
-
 #today-temp{
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 1rem;
 }
 
+/* Forecast */
 #day-card-container{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
 }
-
 .day-card{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1/4fr 3/4fr;
+
     background-color: rgba(223, 253, 255, 0.3);
     border-radius: 15px;
     padding: 0.5rem 1rem;
-    width: fit-content;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
-.day-card h2{margin:0;}
+.day-card h2{
+    margin: 0;
+    grid-column: span 2;
+}
 
-
+/* Temperature Unit Toggle button */
 #temp-toggle{
     margin-top:1rem;
     border-radius:15px;
     padding: 0.5rem 1rem;
     background-image: linear-gradient(to bottom right, lightblue, rgb(86, 108, 164));
     font-weight: bold;
+    color: white;
 }
 #temp-toggle:hover{
     background-image: linear-gradient(to bottom right, rgb(86, 108, 164), lightblue);
     cursor: pointer;
 }
+
 /* ---------ERROR DISPLAY */
 #error{
     background-color: rgba(255, 0, 0, 0.25);
@@ -70,17 +83,15 @@ h1{margin: 0;}
     font-weight: bold;
 }
 
-/* --------LARGER SCREENS */
+/* --------LARGER SCREENS RESPONSIVENESS */
 @media screen and (min-width:406px){
+    /* Container */
     #widget-container{
         width: fit-content;
     }
+    /* Current Weather */
     #today-date{
         font-size: 2.75rem;
-    }
-    #day-card-container{
-        flex-direction: row;
-        justify-content: center;
     }
     #today-weather{
         display: flex;
@@ -92,5 +103,10 @@ h1{margin: 0;}
         font-size: 2.5rem;
         padding: 1rem;
         margin: 0;
+    }
+    /* Forecast */
+    #day-card-container{
+        flex-direction: row;
+        justify-content: center;
     }
 }

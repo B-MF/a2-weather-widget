@@ -90,7 +90,7 @@ body{
 }
 
 /* --------SCREEN SIZE RESPONSIVENESS */
-/* @media screen and (min-width:260px) {
+/* @media screen and (min-width:275px) {
     #widget-container{
         height: 100vh;
     }
@@ -101,7 +101,7 @@ body{
     }
 } */
 
-@media screen and (min-width:275px){
+@media screen and (min-width:400px){
     /* Container */
     #widget-container{
         /* width: fit-content; */
@@ -126,5 +126,43 @@ body{
     #day-card-container{
         flex-direction: row;
         justify-content: center;
+    }
+}
+
+@media screen and (min-width:850px) {
+    #widget-container{
+        display: grid;
+        grid-template-areas: 
+            "c f f" 
+        ;/* c = current weather and f = forecast */
+        gap: 1rem;
+        padding: 3rem;
+    }
+    #today-date{
+        grid-area: c;
+    }
+    #today-weather{
+        grid-area: c;
+        flex-direction: column;
+    }
+    #temp-toggle{
+        grid-area: c;
+        align-self: end;
+        width: fit-content;
+        justify-self: center;
+        margin-bottom: 3rem;
+    }
+    #day-card-container{
+        grid-area: f;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding: 3rem;
+    }
+    .day-card{
+        height: 100%;
+    }
+    .temp{
+        font-size: 2rem;
     }
 }

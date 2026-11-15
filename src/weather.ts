@@ -42,14 +42,8 @@ function getElement(id: string): HTMLElement {
 
 
 //-------VARIABLES
-
-//Loading Page
-const statusEl = getElement("status");
 const loading = getElement("loading");
-
-//Widget
 const widget = getElement("widget-container");
-const header = getElement("widget-header");
 
 //Temperature
 let celsius: boolean = true;
@@ -79,7 +73,7 @@ async function fetchWeather(url: string): Promise<[CurrentWeather, ForecastDay[]
         return [current,forecastday];
 
     } catch(error) {//Improvement: better error messaging ux
-        console.log(error);
+        console.error(error);
         throw error;
     } 
 }

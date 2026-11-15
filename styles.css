@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
+/* SMALL SCREENS FIRST */
+
 /* ---- BASE STYLINGS */
 *{box-sizing: border-box;}
 
@@ -9,7 +11,7 @@ body{
     margin: 0;
     color: white;
 }
-/*----------CLASSES */
+/*----------GLOBAL CLASSES */
 
 /* Temperatures */
 .temp{
@@ -17,7 +19,10 @@ body{
     font-size: 1.25rem;
     margin: 0;
 }
-/* -------THE WIDGET */
+
+/* -------THE WIDGET*/
+
+/* Container */
 #widget-container{
     background-image: linear-gradient(to bottom right, lightblue, rgb(86, 108, 164),rgb(58, 54, 119));
     /* border-radius: 15px; */
@@ -73,7 +78,6 @@ body{
 
 }
 #temp-toggle:hover{
-    /* background-image: linear-gradient(to bottom right, rgb(86, 108, 164), lightblue); */
     cursor: pointer;
     background-color: rgba(173, 200, 210, 0.3);
     box-shadow: inset 0px 2px 5px rgba(0,0,0,0.5)
@@ -89,17 +93,10 @@ body{
     font-weight: bold;
 }
 
-/* --------SCREEN SIZE RESPONSIVENESS */
-/* @media screen and (min-width:275px) {
-    #widget-container{
-        height: 100vh;
-    }
-    #day-card-container{
-        flex-direction: row;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-    }
-} */
+
+
+
+/* LARGER SCREEN SIZES */
 
 @media screen and (min-width:400px){
     /* Container */
@@ -130,6 +127,7 @@ body{
 }
 
 @media screen and (min-width:850px) {
+    /* Container */
     #widget-container{
         display: grid;
         grid-template-areas: 
@@ -138,6 +136,7 @@ body{
         gap: 1rem;
         padding: 3rem;
     }
+    /* current weather */
     #today-date{
         grid-area: c;
     }
@@ -152,6 +151,7 @@ body{
         justify-self: center;
         margin-bottom: 3rem;
     }
+    /* forecast */
     #day-card-container{
         grid-area: f;
         display: grid;

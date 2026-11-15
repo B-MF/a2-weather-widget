@@ -1,12 +1,55 @@
-A3. Refactor weather forecast widget
-    
-    Selected Programming Language: Typescript
+WEATHER FORECAST WIDGET
 
-TASKS
-    Transition existing codebase to new language
-    Review refactored code
-    Provide separate document with enhancement suggestions
-    Provide AI usage document
+    Displays the current weather and a 3 day forecast for Calgary, AB. 
+    Has a button to toggle the temperature between Celsius and Fahrenheit.
+    Responsive Design with a small screens first approach.
+
+A3. Refactor weather forecast widget
+
+    Selected Programming Language for Refactor: Typescript
+
+    Enhancement suggestions        
+        Improve client-side error handling and UX
+            Loading placeholder cards
+            Delayed fetch response 
+            placeholder animation
+
+        Improve Widget's User Experience
+            Weather condition based animated backgrounds
+            Dark mode
+            additional API data
+                option to toggle on/off
+            Menu with settings
+                Accessibility options
+                    High Contrast
+                    Screen Reader
+            Geo-location
+                determine location for API request
+            save multiple locations
+        
+        Improve code organization
+            Separate into modules
+            Use prettier extension
+            
+
+    AI usage
+        Breakdown of refactoring into typescript.
+        
+        Debugging transition errors
+            Importing/exporting issues
+            Undefined data types
+        
+
+
+
+        
+    
+
+a
+
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
 
 
 A2. Develop a weather forecast widget

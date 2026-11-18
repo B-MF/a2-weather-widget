@@ -2,7 +2,7 @@ WEATHER FORECAST WIDGET
 
     Displays the current weather and a 3 day forecast for Calgary, AB. 
     Has a button to toggle the temperature between Celsius and Fahrenheit.
-    Responsive Design with a small screens first approach.
+    Responsive to various screen sizes.
 
 A3. Refactor weather forecast widget
 
@@ -10,34 +10,37 @@ A3. Refactor weather forecast widget
 
     Enhancement suggestions        
         Improve client-side error handling and UX
-            Loading placeholder cards
-            Delayed fetch response 
-            placeholder animation
+          +  Loading placeholder cards
+          +  Placeholder animation
+          +  Delayed fetch response 
 
         Improve Widget's User Experience
-            Weather condition based animated backgrounds
-            Dark mode
-            additional API data
-                option to toggle on/off
-            Menu with settings
+          +  Animated Background - Weather condition based
+          +  Dark and Light modes
+          +  Use additional API data - Hourly temperatures, Wind, Feels like, etc.
+          +  Menu with settings
+                Toggling API data displayed
+                    minimalist pre-set
+                    Customization options
                 Accessibility options
                     High Contrast
                     Screen Reader
-            Geo-location
-                determine location for API request
-            save multiple locations
+          +  Geo-location
+                determine user's location for API request
+          +  save multiple locations
+          +  Round to nearest whole number
         
         Improve code organization
-            Separate into modules
-            Use prettier extension
+          +  Separate into modules
+          +  Use prettier extension
             
 
     AI usage
-        Breakdown of refactoring into typescript.
-        
-        Debugging transition errors
-            Importing/exporting issues
-            Undefined data types
+        Breakdown of refactoring.
+        Steps to refactor JavaScript to typescript.
+        Understanding transition errors
+            Issues with modules - Debug: removed and kept everything in 1 file
+            Undefined data types - Debug: created interfaces and error handling functions
         
 
 
@@ -45,7 +48,6 @@ A3. Refactor weather forecast widget
         
     
 
-a
 
 -------------------------------------------------
 -------------------------------------------------

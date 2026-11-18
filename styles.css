@@ -135,6 +135,7 @@ body{
         ;/* c = current weather and f = forecast */
         gap: 1rem;
         padding: 3rem;
+        padding-left: 6rem;
     }
     /* current weather */
     #today-date{
